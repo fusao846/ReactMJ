@@ -15,6 +15,8 @@ export const Pi = ({
   mode,
 } : PiProps) => {
 
+  if (number > 9) return (<></>);
+
   if (mode==='dummy') return (
     <Box
       sx={{

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Button, Switch } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import {PiGrid} from './PiGrid';
 import {seepi} from './MJCommon';
 
@@ -8,6 +10,7 @@ interface pis  {
   agariPi:(number[])[],
   answerVisible:boolean,
   mode:'real'|'dummy',
+  level:string,
 }
 export const MJ = () =>
 {
@@ -16,10 +19,12 @@ export const MJ = () =>
     agariPi:[],
     answerVisible:false,
     mode:'dummy',
+    level:'easy',
   });
+  const [level, setLevel] = useState<string>('easy');
 
   const showNext = () => {
-    const result = seepi();
+    const result = seepi(level);
     setPi((prevPi) => ({
       ...prevPi,
       haiPi: result.hipi,
@@ -31,9 +36,12 @@ export const MJ = () =>
     setPi((prevPi) => ({
       ...prevPi,
       answerVisible:true,
+      level:level,
     }))
   }
-  
+  const handleChange = (e:SelectChangeEvent) => {
+    setLevel(e.target.value);
+  }  
   return (
     <>
     <p>Real
@@ -45,6 +53,17 @@ export const MJ = () =>
         }))
       }}
     />
+    level
+    <Select
+      sx={{ m: 2, minWidth: 120 }}
+      value={level}
+      label="level"
+      onChange={handleChange}
+    >
+      <MenuItem value={'easy'}>easy</MenuItem>
+      <MenuItem value={'high'}>high</MenuItem>
+      <MenuItem value={'mix'}>mix</MenuItem>
+    </Select>
     </p>
     <Button onClick={showNext}>Next</Button>
     <p><PiGrid size={'medium'} numberArr={pi.haiPi} type={'haiPi'} mode={pi.mode}/></p>

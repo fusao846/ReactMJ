@@ -32,12 +32,12 @@ export const PiGrid = ({
     },
     {
       type:'agariPi7',
-      ml:[10,20,0,10,0,10,0,10,0,10,0,10,0,10,0],
+      ml:[10,20,0,10,0,10,0,10,0,10,0,10,0,10,0,0],
     },
   ];
   let ml = marginLeftArr;
   if (type==='agariPi' && numberArr.length === 16) {
-    numberArr.pop();
+    //numberArr.pop();
     ml = marginLeftArr.filter(m => m.type==='agariPi7');
   } else {
     ml = marginLeftArr.filter(m => m.type===type);

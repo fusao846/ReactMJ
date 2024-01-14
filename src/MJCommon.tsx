@@ -84,7 +84,7 @@ export const agari = (pi:number[]) => {
         ak7 = ak7.concat(wkPi);
         ak7.push(777);
         agariKei.push(ak7);
-        break;
+       // break;
       } else {
         for (let h = 1; h <= 9; h++) {
           const wkPi2 = wkPi.concat();
@@ -121,15 +121,22 @@ const sevenToitsu = (pi:number[]) => {
   }
   return true;
 };
-export const seepi = () => {
-  let newkekka = 'No ten';
+export const seepi = (level:string) => {
   let hp:number[] = [];
   let agariKei:(number[])[] = [];
-  while (newkekka === 'No ten') {
-    //hp = hipi(13);
-    hp = [1,2,2,4,4,5,5,6,6,7,7,9,9];
-  agariKei = agari(hp);
-    newkekka = agariKei.length===0?'No ten':'Tenpi';
+  while (true) {
+    hp = hipi(13);
+    //hp = [1,2,2,3,3,4,4,5,5,6,6,7,7];
+    agariKei = agari(hp);
+    if (level === 'mix' && agariKei.length > 0) {
+      break;
+    }
+    if (level === 'easy' && agariKei.length !== 0 && agariKei.length <= 3) {
+      break;
+    }
+    if (level === 'high' && agariKei.length !== 0 && agariKei.length > 3) {
+      break;
+    }
   }
   return {
     hipi:hp,
